@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stage 4: The Genie and Escape</title>
+  <!-- Google Fonts for a classical look -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Animated gradient background with violet and blue hues */
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cinzel', serif;
+      background: linear-gradient(45deg, #4B0082, #00008B, #8A2BE2, #1E90FF);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+      color: #f5f5f5;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Spark container covers the entire viewport */
+    .spark-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .spark {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #dda0dd; /* light violet */
+      opacity: 0;
+      border-radius: 50%;
+      box-shadow: 0 0 8px 2px #dda0dd;
+      animation: sparkAnim 1.5s linear infinite;
+    }
+    
+    @keyframes sparkAnim {
+      0% {
+        transform: scale(0.5) translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.5) translateY(-120px);
+        opacity: 0;
+      }
+    }
+    
+    /* Main container styling */
+    .container {
+      background: rgba(0, 0, 50, 0.7);
+      padding: 40px 50px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+      max-width: 600px;
+      width: 90%;
+      border: 2px solid #9370DB; /* medium purple */
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      margin: 40px auto;
+    }
+    
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2.4em;
+      color: #e6e6fa; /* lavender */
+    }
+    
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    /* Form styling */
+    form {
+      margin-top: 20px;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 1em;
+      border: 2px solid #9370DB;
+      border-radius: 5px;
+      transition: border 0.3s;
+      background: rgba(255, 255, 255, 0.95);
+      color: #333;
+    }
+    
+    input[type="text"]:focus {
+      border-color: #8A2BE2;
+      outline: none;
+    }
+    
+    button {
+      padding: 12px 20px;
+      font-size: 1em;
+      background-color: #9370DB;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+      margin-top: 10px;
+    }
+    
+    button:hover {
+      background-color: #8A2BE2;
+      transform: scale(1.05);
+    }
+    
+    #responseMessage {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+    
+    .error {
+      background-color: rgba(255, 0, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+    }
+    
+    .success {
+      background-color: rgba(0, 128, 0, 0.7);
+      padding: 10px;
+      border-radius: 5px;
+    }
+    
+    a {
+      color: #e6e6fa;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Genie animation container */
+    #genieAnimation {
+      display: none; /* Hidden until correct answer */
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      text-align: center;
+    }
+    
+    #genieAnimation img {
+      width: 250px;
+      animation: genieFadeIn 2s forwards;
+      opacity: 0;
+    }
+    
+    @keyframes genieFadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    #genieMessage {
+      margin-top: 20px;
+      font-size: 1.4em;
+      background: rgba(0, 0, 50, 0.8);
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #9370DB;
+    }
+  </style>
+</head>
+<body>
+  <!-- Spark container -->
+  <div class="spark-container" id="sparkContainer"></div>
+  
+  <!-- Main content container -->
+  <div class="container">
+    <h1>Stage 4: The Genie and Escape</h1>
+    <p>
+      A genie holds three magical numbers. Consider these clues:<br>
+      1. The first number is 1 greater than the second.<br>
+      2. The third number equals the sum of the first and second numbers minus 2.<br>
+      3. The total of all three numbers is 12.<br>
+      Enter the three-digit code (in order).
+    </p>
+    
+    <form id="answerForm">
+      <input type="text" id="userAnswer" placeholder="Enter your code here">
+      <button type="submit">Submit Answer</button>
+    </form>
+    
+    <div id="responseMessage"></div>
+  </div>
+  
+  <!-- Genie animation container -->
+  <div id="genieAnimation">
+    <!-- Genie GIF (example from Giphy; replace with a preferred URL) -->
+    <img src="./pic.jpg" alt="Genie">
+    <div id="genieMessage">
+      Correct! The genie has revealed the path.<br>
+      <a href="https://example.com/nextstage" target="_blank">Click here to continue to Stage 5.</a>
+    </div>
+  </div>
+  
+  <script>
+    // JavaScript to generate spark elements
+    const sparkContainer = document.getElementById('sparkContainer');
+    const numSparks = 70; // Increase number of sparks for more effect
+    
+    for (let i = 0; i < numSparks; i++) {
+      const spark = document.createElement('div');
+      spark.classList.add('spark');
+      // Random starting position within the viewport
+      spark.style.left = Math.random() * 100 + '%';
+      spark.style.top = Math.random() * 100 + '%';
+      // Random duration and delay for animation
+      const duration = 1 + Math.random() * 1.5;
+      spark.style.animationDuration = duration + 's';
+      spark.style.animationDelay = Math.random() * 2 + 's';
+      sparkContainer.appendChild(spark);
+    }
+    
+    // Expected code is "435"
+    const expectedCode = "435";
+    
+    document.getElementById("answerForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // Prevent default form submission
+      
+      const userCode = document.getElementById("userAnswer").value.trim();
+      
+      if (userCode === expectedCode) {
+        // Clear any previous message
+        document.getElementById("responseMessage").innerHTML = "";
+        
+        // Display the genie animation container
+        const genieContainer = document.getElementById("genieAnimation");
+        genieContainer.style.display = "block";
+        
+        // Optionally, scroll to the genie animation
+        genieContainer.scrollIntoView({ behavior: "smooth" });
+      } else {
+        document.getElementById("responseMessage").innerHTML = '<div class="error">Incorrect code. Please try again.</div>';
+      }
+    });
+  </script>
+</body>
+</html>
