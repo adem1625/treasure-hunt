@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>The Cave of Wonders </title>
+  <title>The Cave of Wonders</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /*2*/
     /* Gradient animation */
     @keyframes gradientAnimation {
       0% { background-position: 0% 50%; }
@@ -36,6 +35,12 @@
       border: 2px solid #ffd700;
       animation: fadeInUp 1s ease-out forwards;
       opacity: 0;
+    }
+
+    /* Change stage name color */
+    .container h1 {
+      color: #ffd700;
+      margin-bottom: 10px;
     }
 
     @keyframes fadeInUp {
@@ -133,7 +138,8 @@
 </head>
 <body>
   <div class="container">
-    <h1>Stage 3: The Cave of Wonders – Fragment Selection</h1>
+    <h1>The Cave of Wonders</h1>
+    <p>Welcome to a realm of mystique where secrets and treasures await. Embark on your journey and unlock the magic!</p>
     <p class="info">
       For more information, please check Nateg's latest posts.
     </p>
@@ -155,8 +161,7 @@
   <div id="genieAnimation">
     <img src="./gen.png" alt="Magic Genie">
     <div id="genieMessage">
-      <p>By the sands of time! You've solved the riddle!</p>
-      <p>Journey forth to claim your reward!</p>
+      <p>Congratulations! The Cave of Wonders is now open. Enjoy your treasure!</p>
       <a href="https://adem1625.github.io/treasure-hunt2.0/" style="color: #ffd700; text-decoration: none; font-weight: bold;">
         Enter the Treasure Chamber →
       </a>
@@ -194,7 +199,7 @@
     });
 
     // Form handling
-    const correctSequence = "6-4-7-2";
+    const correctSequence = "1-2-3-4";
     document.getElementById("fragmentForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const userInput = document.getElementById("sequenceInput").value.trim();
