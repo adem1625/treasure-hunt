@@ -151,7 +151,7 @@
       </tr>
     </table>
     <form id="fragmentForm">
-      <input type="text" id="sequenceInput" placeholder="Enter sequence (e.g., 6-4-7-2)">
+      <input type="text" id="sequenceInput" placeholder="Enter sequence (e.g., 1-2-3-4)">
       <button type="submit">Submit Sequence</button>
     </form>
     <div id="result"></div>
@@ -199,7 +199,7 @@
     });
 
     // Form handling
-    const correctSequence = "1-2-3-4";
+    const correctSequence = "6-4-7-2";
     document.getElementById("fragmentForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const userInput = document.getElementById("sequenceInput").value.trim();
